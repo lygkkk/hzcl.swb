@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SQLite;
 
 namespace hzcl.swb.DAL
@@ -48,6 +49,24 @@ namespace hzcl.swb.DAL
                 }
             }
             return i;
+        }
+
+
+        public static Object ExecuteScalar(string sql, params SQLiteParameter[] param)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(conn))
+            {
+                using (SQLiteCommand command = new SQLiteCommand(sql, connection))
+                {
+                    if (param != null)
+                    {
+                        command.Parameters.AddRange(param);
+                    }
+
+                    connection.Open();
+                    return command.ExecuteScalar();
+                }
+            }
         }
     }
 }

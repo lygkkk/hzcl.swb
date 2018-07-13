@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SQLite;
 using hzcl.swb.Model;
 namespace hzcl.swb.DAL
@@ -57,6 +58,28 @@ namespace hzcl.swb.DAL
             };
 
             return SqliteHelp.ExecuteTable(sql, param);
+        }
+
+
+        public DataTable GetPageList(int startPage, int endPage)
+        {
+            //string sql = "SELECT * FROM (SELECT *, COUNT(id) AS num FROM customer) AS list WHERE list.num >= @startPage AND list.num <= @endPage";
+            string sql = "SELECT * FROM customer LIMIT @startPage OFFSET @endPage";
+
+            SQLiteParameter[] param =
+            {
+                new SQLiteParameter("@startPage", 10),
+                new SQLiteParameter("@endPage", startPage - 1),
+            };
+
+            return SqliteHelp.ExecuteTable(sql, param);
+            //return SqliteHelp.ExecuteTable(sql);
+        }
+
+        public int GetRecordCount()
+        {
+            string sql = "SELECT COUNT(id) FROM customer";
+            return Convert.ToInt32(SqliteHelp.ExecuteScalar(sql));
         }
     }
 }
