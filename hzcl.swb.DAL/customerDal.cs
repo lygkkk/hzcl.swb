@@ -60,6 +60,18 @@ namespace hzcl.swb.DAL
             return SqliteHelp.ExecuteTable(sql, param);
         }
 
+        public DataTable GetSingleCustomer(string userName)
+        {
+            string sql = "SELECT * FROM customer WHERE Name = @Name";
+            SQLiteParameter[] param =
+            {
+                new SQLiteParameter("@Name", userName),
+            };
+
+            return SqliteHelp.ExecuteTable(sql, param);
+        }
+
+
 
         public DataTable GetPageList(int startPage, int endPage)
         {

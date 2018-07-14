@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Net.Configuration;
 using System.Text.RegularExpressions;
 using hzcl.swb.DAL;
 using hzcl.swb.Model;
@@ -48,6 +49,30 @@ namespace hzcl.swb.BLL
             int recordCount = customerDal.GetRecordCount();
             int pageCount = Convert.ToInt32(Math.Ceiling((double)recordCount / pageSize)); 
             return pageCount;
+        }
+
+
+        public bool CheckUserInfo(string userName, string userPwd, out string msg, out DataTable dt)
+        {
+            dt = customerDal.GetSingleCustomer(userName);
+            if (dt.Rows.Count == 0)
+            {
+                msg = "查无此人";
+                return false;
+            }
+            else
+            {
+                if (userPwd == dt.Rows[0]["Age"].ToString())
+                {
+                    msg = "登录成功";
+                    return true;
+                }
+                else
+                {
+                    msg = "密码错误";
+                    return false;
+                }
+            }
         }
     }
 }
