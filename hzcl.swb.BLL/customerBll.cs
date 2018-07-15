@@ -37,6 +37,11 @@ namespace hzcl.swb.BLL
             return customerDal.GetSingleCustomer(id);
         }
 
+        public DataTable GetSingleCustomer(string name)
+        {
+            return customerDal.GetSingleCustomer(name);
+        }
+
         public DataTable GetPageList(int pageIndex, int pageSize)
         {
             int startPage = (pageIndex - 1) * pageSize + 1;

@@ -23,6 +23,17 @@ namespace hzcl.swb.DAL
             return SqliteHelp.ExecuteNonQuery(sql, para);
         }
 
+        public int DeleteCustomerInfo(string name)
+        {
+            string sql = "DELETE FROM customer WHERE Nmae = @name ";
+            SQLiteParameter[] para =
+            {
+                new SQLiteParameter("@name", name),
+            };
+
+            return SqliteHelp.ExecuteNonQuery(sql, para);
+        }
+
         public int AddCustomer(customer customer)
         {
             string sql = "INSERT INTO customer VALUES(NULL, @Name, @Age)";

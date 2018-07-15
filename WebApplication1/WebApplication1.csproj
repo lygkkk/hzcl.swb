@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,12 +50,10 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -84,6 +83,7 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -133,21 +133,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="About.aspx" />
-    <Content Include="Addcustomer.aspx" />
-    <Content Include="Contact.aspx" />
+    <Content Include="6.2之前含\About.aspx" />
+    <Content Include="6.2之前含\Addcustomer.aspx" />
+    <Content Include="6.2之前含\AJAXDemo.aspx" />
+    <Content Include="6.2之前含\AJAXPostDemo.aspx" />
+    <Content Include="6.2之前含\Contact.aspx" />
+    <Content Include="6.3\JsonDemo.html" />
+    <Content Include="6.3\UserInfoList.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="customerInfo.aspx" />
-    <Content Include="CustomerList.aspx" />
-    <Content Include="Default.aspx" />
-    <Content Include="EditCustomer.aspx" />
+    <Content Include="6.2之前含\customerInfo.aspx" />
+    <Content Include="6.2之前含\CustomerList.aspx" />
+    <Content Include="6.2之前含\Default.aspx" />
+    <Content Include="6.2之前含\EditCustomer.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Global.asax" />
+    <Content Include="6.2之前含\Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -156,13 +160,20 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="ApplicationInsights.config">
+    <Content Include="6.2之前含\ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="DeleteCustomer.ashx" />
+    <Content Include="6.2之前含\DeleteCustomer.ashx" />
+    <Content Include="6.2之前含\GetCurrenDate.ashx" />
+    <Content Include="6.2之前含\CheckUserName.ashx" />
+    <Content Include="6.3\GetJson.ashx" />
+    <Content Include="6.3\LoadAllUserInfo.ashx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Login.aspx" />
-    <Content Include="LoginSuccess.aspx" />
+    <Content Include="6.2之前含\JqueryAJAX.aspx" />
+    <Content Include="6.2之前含\Login.aspx" />
+    <Content Include="6.2之前含\Login.html" />
+    <Content Include="6.2之前含\LoginSuccess.aspx" />
+    <Content Include="6.2之前含\Register.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -198,78 +209,118 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Addcustomer.aspx.cs">
+    <Compile Include="6.2之前含\Addcustomer.aspx.cs">
       <DependentUpon>Addcustomer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Addcustomer.aspx.designer.cs">
+    <Compile Include="6.2之前含\Addcustomer.aspx.designer.cs">
       <DependentUpon>Addcustomer.aspx</DependentUpon>
     </Compile>
+    <Compile Include="6.2之前含\AJAXDemo.aspx.cs">
+      <DependentUpon>AJAXDemo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="6.2之前含\AJAXDemo.aspx.designer.cs">
+      <DependentUpon>AJAXDemo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="6.2之前含\AJAXPostDemo.aspx.cs">
+      <DependentUpon>AJAXPostDemo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="6.2之前含\AJAXPostDemo.aspx.designer.cs">
+      <DependentUpon>AJAXPostDemo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="6.3\GetJson.ashx.cs">
+      <DependentUpon>GetJson.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="6.3\LoadAllUserInfo.ashx.cs">
+      <DependentUpon>LoadAllUserInfo.ashx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="About.aspx.cs">
+    <Compile Include="6.2之前含\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="About.aspx.designer.cs">
+    <Compile Include="6.2之前含\About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Contact.aspx.cs">
+    <Compile Include="6.2之前含\CheckUserName.ashx.cs">
+      <DependentUpon>CheckUserName.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="6.2之前含\Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Contact.aspx.designer.cs">
+    <Compile Include="6.2之前含\Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="customerInfo.aspx.cs">
+    <Compile Include="6.2之前含\customerInfo.aspx.cs">
       <DependentUpon>customerInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="customerInfo.aspx.designer.cs">
+    <Compile Include="6.2之前含\customerInfo.aspx.designer.cs">
       <DependentUpon>customerInfo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CustomerList.aspx.cs">
+    <Compile Include="6.2之前含\CustomerList.aspx.cs">
       <DependentUpon>CustomerList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CustomerList.aspx.designer.cs">
+    <Compile Include="6.2之前含\CustomerList.aspx.designer.cs">
       <DependentUpon>CustomerList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Default.aspx.cs">
+    <Compile Include="6.2之前含\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
+    <Compile Include="6.2之前含\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DeleteCustomer.ashx.cs">
+    <Compile Include="6.2之前含\DeleteCustomer.ashx.cs">
       <DependentUpon>DeleteCustomer.ashx</DependentUpon>
     </Compile>
-    <Compile Include="EditCustomer.aspx.cs">
+    <Compile Include="6.2之前含\EditCustomer.aspx.cs">
       <DependentUpon>EditCustomer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="EditCustomer.aspx.designer.cs">
+    <Compile Include="6.2之前含\EditCustomer.aspx.designer.cs">
       <DependentUpon>EditCustomer.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Global.asax.cs">
+    <Compile Include="6.2之前含\GetCurrenDate.ashx.cs">
+      <DependentUpon>GetCurrenDate.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="6.2之前含\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Login.aspx.cs">
+    <Compile Include="6.2之前含\JqueryAJAX.aspx.cs">
+      <DependentUpon>JqueryAJAX.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="6.2之前含\JqueryAJAX.aspx.designer.cs">
+      <DependentUpon>JqueryAJAX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="6.2之前含\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Login.aspx.designer.cs">
+    <Compile Include="6.2之前含\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoginSuccess.aspx.cs">
+    <Compile Include="6.2之前含\LoginSuccess.aspx.cs">
       <DependentUpon>LoginSuccess.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoginSuccess.aspx.designer.cs">
+    <Compile Include="6.2之前含\LoginSuccess.aspx.designer.cs">
       <DependentUpon>LoginSuccess.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="6.2之前含\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="6.2之前含\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -283,6 +334,9 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="6.2之前含\UserLogin.ashx.cs">
+      <DependentUpon>UserLogin.ashx</DependentUpon>
     </Compile>
     <Compile Include="VerificationCode.ashx.cs">
       <DependentUpon>VerificationCode.ashx</DependentUpon>
@@ -303,6 +357,7 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="VerificationCode.ashx" />
+    <Content Include="6.2之前含\UserLogin.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

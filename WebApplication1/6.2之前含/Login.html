@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#msgUserName").css("display", "none");
+            $("#msgUserPwd").css("display", "none");
+
+            $("#btnLogin").click(function() {
+                CheckUserInfo();
+            });
+
+            function CheckUserInfo() {
+                var userName = $("#txtUserName").val();
+                var userPwd = $("#txtUserPwd").val();
+
+                if (userName == "") {
+                    $("#msgUserName").css("display", "block");
+                    $("#msgUserName").text("用户名不得为空");
+                    return false;
+                }
+
+                if (userPwd == "") {
+                    $("#msgUserPwd").css("display", "block");
+                    $("#msgUserPwd").text("密码不得为空");
+                    return false;
+                }
+
+                $.post("UserLogin.ashx",
+                    { "name": userName, "pwd": userPwd },
+                    function(data) {
+                        var serverData = data.split(":");
+                        if (serverData[0] == "YES") {
+                            window.location.href = "CustomerList";
+                        } else {
+                            alert(serverData[1]);
+                        }
+                    });
+            };
+        });
+    </script>
+</head>
+<body>
+    用户名:<input type="text" name="txtName" id ="txtUserName"/><span id ="msgUserName"></span><br/>
+    密码:<input type="text" name="txtPwd" id ="txtUserPwd"/><span id="msgUserPwd"></span><br/>
+    <input type="button" value="登录" id="btnLogin"/>
+</body>
+</html>

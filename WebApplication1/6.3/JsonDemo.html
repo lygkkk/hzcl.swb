@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("#btnGetDate").click(function() {
+                $.post("GetJson.ashx",
+                    {},
+                    function(data) {
+                        alert("用户名:" + data["name"] + "\n" + "年龄:" + data["age"]);
+                    },
+                    "json");
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="button" value="获取数据" id="btnGetDate"/>
+</body>
+</html>
