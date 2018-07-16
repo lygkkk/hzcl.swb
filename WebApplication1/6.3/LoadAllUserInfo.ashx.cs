@@ -19,12 +19,26 @@ namespace WebApplication1._6._3
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
-            customerBll customerBll = new customerBll();
-            DataTable dt = customerBll.GetAllCustomerInfo();
 
-            System.Web.Script.Serialization.JavaScriptSerializer js = new JavaScriptSerializer();
+            int pageIndex;
+
+            if (!int.TryParse(context.Request["pageIndex"], out pageIndex))
+            {
+                pageIndex = 1;
+            }
+            customerBll customerBll = new customerBll();
+
+            int pageCount = customerBll.GetPageCount(10);
+
+            pageIndex = pageIndex < 1 ? 1 : pageIndex;
+            pageIndex = pageIndex > pageCount ? pageCount : pageIndex;
+
+            
+
+            DataTable dt = customerBll.GetPageList(pageIndex, 10);
+
             string str = JsonConvert.SerializeObject(dt);
-            //context.Response.Write("{\"name\":\"dada\"}");
+            
             context.Response.Write(str);
         }
 

@@ -3,15 +3,30 @@
 <head>
     <meta charset="utf-8" />
     <title>用户列表</title>
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../Content/themes/icon.css" rel="stylesheet" />
+    <link href="../Content/themes/default/easyui.css" rel="stylesheet" />
     <script src="../Scripts/jquery-3.3.1.js"></script>
+    <script src="../Scripts/jquery.easyui.min.js"></script>
     <script type="text/javascript">
-        $(function() {
-            LoadAllUserInfo();
+        $(function () {
+            $("#AddUserInfoDiv").css("display", "none");
+            $("#ModifyDiv").css("display", "none");
+
+            LoadAllUserInfo(1);
+
+            $("#AddUserInfo").click(function () {
+                BindAddUserInfoClick();
+            });
+
+            
+
+           
         });
 
-        function LoadAllUserInfo() {
+        function LoadAllUserInfo(pageIndex) {
             $.post("LoadAllUserInfo.ashx",
-                {},
+                {"pageIndex":pageIndex},
                 function (data) {
                     //alert(data);
                     for (var i = 0; i < data.length; i++) {
@@ -19,16 +34,146 @@
                             "<td>" + data[i].ID + "</td>" +
                             "<td>" + data[i].Name + "</td>" +
                             "<td>" + data[i].Age + "</td>" +
+                            "<td><a href = javascript:void(0) class = delete did = '" + data[i].ID + "' >删除</a></td>" +
+                            "<td><a href = javascript:void(0) class = details nid = " + data[i].ID + ">详细</a></td>" +
+                            "<td><a href = javascript:void(0) class = modify mid = " + data[i].ID + ">修改</a></td>" +
                             "</tr>"
                         ).appendTo("#tableList");
                     }
+                    BindDeleteClick();
+                    BindModifyClick();
                 },
                 "json");
+        }
+
+        function BindDeleteClick() {
+
+            $(".delete").click(function () {
+                if (confirm("确认要删除？")) {
+                    var id = $(this).attr("did");
+                    $.post("DeleteUserInfo.ashx", { "id": id }, function (r) {
+                        if (r == "YES") {
+                            $("#tableList tr:gt(0)").remove();
+                            LoadAllUserInfo();
+                            alert(r);
+                        } else {
+                            alert(r);
+                        }
+
+                    });
+                }
+                //$.messager.confirm("删除提示", "确定要删除", function (r) {
+                //    if (r)
+                //        alert("a");
+                //});
+            });
+        }
+
+        function BindAddUserInfoClick() {
+            $("#AddUserInfoDiv").css("display", "block");
+            $('#AddUserInfoDiv').dialog({
+                width: 300,
+                height: 300,
+                title: "新增用户信息",
+                collapsible: true,
+                maximizble: true,
+                resizable: true,
+                modal: true,
+                buttons: [
+                    {
+                        text: 'ok',
+                        handler: function () {
+                            AddUserInfo();
+                        }
+                    }, {
+                        text: 'cancel',
+                        handler: function () {
+                            $('#AddUserInfoDiv').dialog('close');
+                        }
+                    }
+                ]
+            });
+        }
+
+        function AddUserInfo() {
+            var info = $("#AdduserInfoForm").serializeArray();
+            $.post("AddUserInfo.ashx",
+                info,
+                function (r) {
+                    if (r) {
+                        $("#AdduserInfoForm input").val("");
+                        $('#AddUserInfoDiv').dialog("close");
+                        $("#AddUserInfoTable tr:gt(0)").remove();
+                        LoadAllUserInfo();
+
+                        alert("新增成功！");
+                    } else {
+                        alert("新增失败");
+                    }
+                });
+        }
+
+        function BindModifyClick() {
+            $(".modify").click(function () {
+                var id = $(this).attr("mid");
+                $.post("GetSingalUserInfo.ashx",
+                    {"id":id},
+                    function (data) {
+                        $("#modifyId").val(data[0].ID);
+                        $("#modifyName").val(data[0].Name);
+                        $("#modifyAge").val(data[0].Age);
+                        $("#ModifyDiv").css("display", "block");
+                        $('#ModifyDiv').dialog({
+                            width: 300,
+                            height: 300,
+                            title: "修改用户信息",
+                            collapsible: true,
+                            maximizble: true,
+                            resizable: true,
+                            modal: true,
+                            buttons: [
+                                {
+                                    text: 'ok',
+                                    handler: function () {
+                                        ModifyUserInfo();
+                                    }
+                                }, {
+                                    text: 'cancel',
+                                    handler: function () {
+                                        $('#ModifyDiv').dialog('close');
+                                    }
+                                }
+                            ]
+                        });
+                        
+
+                    }, "json");
+            });
+        }
+
+        function ModifyUserInfo() {
+            var info = $("#ModifyForm").serializeArray();
+            $.post("ModifyUserInfo.ashx",
+                info,
+                function (r) {
+                    if (r) {
+                        $("#ModifyForm input").val("");
+                        $('#ModifyDiv').dialog("close");
+                        $("#tableList tr:gt(0)").remove();
+                        LoadAllUserInfo();
+
+                        alert("修改成功！");
+                    } else {
+                        alert("修改失败");
+                    }
+                });
         }
     </script>
 </head>
 <body>
-<table id ="tableList">
+<a href="javascript:void(0)" id="AddUserInfo">添加用户</a>
+
+<table id="tableList" class="table table-hover">
     <tr>
         <th>序号</th>
         <th>姓名</th>
@@ -37,8 +182,28 @@
         <th>修改</th>
         <th>删除</th>
     </tr>
-    
-
 </table>
+
+<div id="AddUserInfoDiv">
+    <form id="AdduserInfoForm">
+        <table id="AddUserInfoTable">
+            <tr><td>用户名:<input type="text" name="txtName" /></td></tr>
+            <tr><td>年  龄:<input type="text" name="txtAge" /></td></tr>
+        </table>
+    </form>
+</div>
+
+
+<div id="ModifyDiv">
+    <form id="ModifyForm">
+        <input type="hidden" name="txtID" id ="modifyId"/>
+        <table id="ModifyTable">
+            <tr><td>用户名:<input type="text" name="txtName" id="modifyName"/></td></tr>
+            <tr><td>年 龄:<input type="text" name="txtAge" id="modifyAge"/></td></tr>
+        </table>
+    </form>
+</div>
 </body>
 </html>
+
+
