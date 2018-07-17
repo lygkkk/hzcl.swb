@@ -140,6 +140,7 @@
     <Content Include="6.2之前含\Contact.aspx" />
     <Content Include="6.3\JsonDemo.html" />
     <Content Include="6.3\UserInfoList.html" />
+    <Content Include="6.6\CacheDemo.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -692,6 +693,13 @@
     </Compile>
     <Compile Include="6.3\ModifyUserInfo.ashx.cs">
       <DependentUpon>ModifyUserInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="6.6\CacheDemo.aspx.cs">
+      <DependentUpon>CacheDemo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="6.6\CacheDemo.aspx.designer.cs">
+      <DependentUpon>CacheDemo.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="6.2之前含\About.aspx.cs">
