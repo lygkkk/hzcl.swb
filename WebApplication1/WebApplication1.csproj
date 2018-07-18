@@ -141,6 +141,7 @@
     <Content Include="6.3\JsonDemo.html" />
     <Content Include="6.3\UserInfoList.html" />
     <Content Include="6.6\CacheDemo.aspx" />
+    <Content Include="6.6\PageCacheDemo.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -700,6 +701,13 @@
     </Compile>
     <Compile Include="6.6\CacheDemo.aspx.designer.cs">
       <DependentUpon>CacheDemo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="6.6\PageCacheDemo.aspx.cs">
+      <DependentUpon>PageCacheDemo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="6.6\PageCacheDemo.aspx.designer.cs">
+      <DependentUpon>PageCacheDemo.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="6.2之前含\About.aspx.cs">
